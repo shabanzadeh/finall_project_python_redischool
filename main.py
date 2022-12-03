@@ -1,4 +1,7 @@
 import openpyxl
+
+from User import User
+
 car_file =openpyxl.load_workbook("Car_Rantal.xlsx")
 
 car_list =car_file['Tabelle1']
@@ -13,16 +16,21 @@ for car_row in range(2, car_list.max_row + 1):
     if type_car in car_per_name:
         current_name_product= car_per_name[type_car]
         car_per_name[type_car]=current_name_product +1
-## calculate type with number of passengers
+# calculate type with number of passengers
         car_per_passagiere[type_car]=number_passengers
     else:
         car_per_name[type_car] =1
-print(car_per_name)
+#print(car_per_name)
+print("Herzlichen welcomen in Car rental")
+
 print(f"see available taxis at the moment with copacity: {car_per_passagiere}")
 # how many type car with number of passasigere
 
 
 
+app_user_one =User("shabanzade","maryam shabanzadeh","pwd1","5","BMV")
+app_user_one.get_user_info()
+app_user_one.change_password("234")
 import pandas as pd
 #import matplotlib.pyplot as plt
 
