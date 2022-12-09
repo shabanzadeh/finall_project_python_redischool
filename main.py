@@ -62,7 +62,7 @@ print(f"if the car is reserved as a family, we have a 30% discount for you: {dic
 
 
 app_user_one =User("shabanzade","maryam","pwd1",0,"Hatchback")
-app_user_one.numberOffamily()
+app_user_one.get_number_family()
 app_user_one.get_select_car()
 app_user_one.get_user_info()
 app_user_one.change_password("234")
@@ -71,9 +71,9 @@ app_user_one.change_password("234")
 import pandas as pd
 #import matplotlib.pyplot as plt
 
-from datetime import date
-from pathlib import Path
-from datetime import datetime
+##from datetime import date
+#from pathlib import Path
+#from datetime import datetime
 #read the file
 #data_1 = pd.read_csv("/Car_Rantal.txt")
 #print(data_1.shape)

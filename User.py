@@ -7,10 +7,10 @@ class User:
         self.id_booking = 0
         self.select_car_user = select_car_user
         self.result=[]
-    def number_family(self):
+    def get_number_family(self):
         for i in range(1):
             family=input("are you family: ja oder nein: ")
-            print(family)
+
             if family=="nein":
                 break
             else:
@@ -18,8 +18,8 @@ class User:
                 self.numberOffamily=numberOf_family
     def change_password(self,new_password):
         self.password=new_password
-    def get_select_car(self,which_auto):
-        self.select_car = which_auto
+    #def get_select_car(self,which_auto):
+     #   self.select_car = which_auto
     def get_select_car(self):
         neu_select_car_user= input(" Please choose the car you want: ")
         self.select_car_user=neu_select_car_user
