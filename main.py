@@ -13,7 +13,7 @@ car_price_type = {}
 dicount_car={}
 
 
-print(car_list.max_row)
+
 for car_row in range(2, car_list.max_row + 1):
     number_passengers = car_list.cell(car_row, 3).value
     preis_car=car_list.cell(car_row,7).value
@@ -63,7 +63,8 @@ print(f"if the car is reserved as a family, we have a 30% discount for you: {dic
 
 app_user_one =User("shabanzade","maryam","pwd1",0,"Hatchback")
 app_user_one.get_number_family()
-app_user_one.get_select_car()
+app_user_one.get_offer_auto()
+#app_user_one.get_select_car()
 app_user_one.get_user_info()
 app_user_one.change_password("234")
 

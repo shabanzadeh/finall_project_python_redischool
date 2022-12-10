@@ -6,6 +6,7 @@ class User:
         self.numberOffamily=numberOffamily
         self.id_booking = 0
         self.select_car_user = select_car_user
+        self.offer_auto = ""
         self.result=[]
     def get_number_family(self):
         for i in range(1):
@@ -14,17 +15,39 @@ class User:
             if family=="nein":
                 break
             else:
-                numberOf_family=input("how many people did you consist of: ")
+                numberOf_family=int(input("how many people did you consist of: "))
                 self.numberOffamily=numberOf_family
     def change_password(self,new_password):
         self.password=new_password
     #def get_select_car(self,which_auto):
      #   self.select_car = which_auto
-    def get_select_car(self):
-        neu_select_car_user= input(" Please choose the car you want: ")
-        self.select_car_user=neu_select_car_user
+
     def get_user_info(self):
-        print(f"User {self.name} current have a {self.numberOffamily} and chose this car {self.select_car_user}")
+        print(f"User {self.name} current nummber of family is {self.numberOffamily} and chose this car {self.select_car_user}")
+
+    def get_offer_auto(self):
+
+        while 1:
+            if self.numberOffamily>=2:
+                offer = input("I can offer you Hachback or SUV: please select your car otherweise write no: ")
+                if offer == "Hachback" or offer=="SUV":
+                    break
+
+                else:
+                    offer = input("I can offer you Luxy or SUV: please select your car otherweise write no: ")
+                    if offer == "no":
+                        continue
+
+                    self.offer_auto=offer
+                    return self.offer_auto
+
+    #def get_select_car(self):
+     #   print(self.offer_auto)
+      #  neu_select_car_user = input(" Please choose the car you want: ")
+       # self.select_car_user = neu_select_car_user
+        #return self.select_car_user
+
+
     def get_calculate_price(self,price):
         print(price)
     def get_calculate_auto_rabbatt(self):
