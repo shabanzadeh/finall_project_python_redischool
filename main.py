@@ -46,43 +46,32 @@ for car_row in range(2, car_list.max_row + 1):
 
 
 
-print("Herzlichen welcomen in Car rental\n")
+#print("Herzlichen welcomen in Car rental\n")
 
-print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
-print(f"Car rental price in one day {car_price_type}\n")
-print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
-
-#which_auto =input("which auto: ")
-#number_family =int(input("how many number of family: "))
+#print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
+#print(f"Car rental price in one day {car_price_type}\n")
+#print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
 
 
 
-# how many type car with number of passasigere
+user_input =""
+while user_input != "exit":
+    print("Herzlichen welcomen in Car rental\n")
+
+    print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
+    print(f"Car rental price in one day {car_price_type}\n")
+    print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
+    app_user_one = User("shabanzade", "maryam", "pwd1", 0, "Hatchback")
+    app_user_one.get_number_family()
+    app_user_one.get_offer_auto()
+    app_user_one.get_select_car()
+    #app_user_one.get_calculate_auto_rabbatt()
+    app_user_one.get_user_info()
+    app_user_one.change_password("234")
+    user_input = input("exit oder start: ")
 
 
 
-app_user_one =User("shabanzade","maryam","pwd1",0,"Hatchback")
-app_user_one.get_number_family()
-app_user_one.get_offer_auto()
-#app_user_one.get_select_car()
-app_user_one.get_user_info()
-app_user_one.change_password("234")
 
-
-import pandas as pd
-#import matplotlib.pyplot as plt
-
-##from datetime import date
-#from pathlib import Path
-#from datetime import datetime
-#read the file
-#data_1 = pd.read_csv("/Car_Rantal.txt")
-#print(data_1.shape)
-#print(data_1.head(10))
-
-
-#df = pd.read_csv('/Car_Rantal.txt')
-#print(df)
-#df.head(5)
 
 
