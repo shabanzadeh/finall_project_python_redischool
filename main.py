@@ -3,6 +3,7 @@ import openpyxl
 from User import User
 
 
+
 car_file =openpyxl.load_workbook("Car_Rantal.xlsx")
 
 car_list =car_file['Tabelle1']
@@ -52,20 +53,23 @@ for car_row in range(2, car_list.max_row + 1):
 #print(f"Car rental price in one day {car_price_type}\n")
 #print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
 
+print("Herzlichen welcomen in Car rental\n")
 
+print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
+print(f"Car rental price in one day {car_price_type}\n")
+print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
+app_user_one = User("shabanzade", "maryam", "pwd1", 0, "Hatchback")
 
 user_input =""
 while user_input != "exit":
-    print("Herzlichen welcomen in Car rental\n")
 
-    print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
-    print(f"Car rental price in one day {car_price_type}\n")
-    print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
-    app_user_one = User("shabanzade", "maryam", "pwd1", 0, "Hatchback")
     app_user_one.get_number_family()
     app_user_one.get_offer_auto()
     app_user_one.get_select_car()
-    #app_user_one.get_calculate_auto_rabbatt()
+    app_user_one.get_calculate_price(car_price_type)
+    app_user_one.get_calculate_auto_rabbatt()
+
+
     app_user_one.get_user_info()
     app_user_one.change_password("234")
     user_input = input("exit oder start: ")
