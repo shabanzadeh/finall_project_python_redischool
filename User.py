@@ -29,10 +29,10 @@ for car_row in range(2, car_list.max_row + 1):
         car_per_name[type_car] =1
     if type_car in car_price_type:
         current_total_price =car_price_type.get(type_car)
-        car_price_type[type_car]=preis_car
-        dicount_car[type_car]=0.3*preis_car
-    car_price_type[type_car]=preis_car
-    dicount_car[type_car]=0.3 * preis_car
+        car_price_type[type_car]=(preis_car)
+        dicount_car[type_car]=0.3*(preis_car)
+    car_price_type[type_car]=(preis_car)
+    dicount_car[type_car]=round(0.3 *(preis_car))
 class User:
 
 
@@ -47,17 +47,18 @@ class User:
         self.price = 0
         self.discount=0
         self.anzahle_auto=0
+        self.gesamt_cost=0
 
     def herzlich_welcome(self):
         print("Herzlichen welcomen in Car rental\n")
 
         print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
-        print(f"Car rental price in one day {car_price_type}\n")
+        print(f"Car rental price in one day {car_price_type} Euro\n")
         print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
 
     def get_number_family(self):
         for i in range(1):
-            family=input("are you family: yes oder no: ")
+            family=input("are you family: yes oder no: ").lower()
 
             if family=="no":
 
@@ -70,6 +71,7 @@ class User:
                 except ValueError:
                     print("you can to write just string")
                     numberOf_family = int(input("how many people did you consist of: "))
+                    self.numberOffamily = numberOf_family
 
 
 
@@ -84,13 +86,13 @@ class User:
     def get_offer_auto(self):
         while 1:
             if self.numberOffamily >= 2:
-                offer = input("I can offer you Hachback or SUV: please select your car otherweise write no: ")
-                if offer == "Hachback".lower() or offer == "SUV".lower():
+                offer = input("I can offer you Hachback or SUV: please select your car otherweise write no: ").lower()
+                if offer == "hachback" or offer == "suv":
                     self.offer_auto = offer
                     break
 
             else:
-                offer = input("I can offer you Luxy or SUV: please select your car otherweise write no: ")
+                offer = input("I can offer you Luxy or SUV: please select your car otherweise write no: ").lower()
                 self.offer_auto = offer
                 break
 
@@ -113,42 +115,46 @@ class User:
         else:
             price1=car_price_type["Sendan"]
         self.price=price1
-        return self.price
+
+        return self.price*self.anzahle_auto
+
+    def get_anzahle_auto(self):
+        if (4<=self.numberOffamily<=8) and (self.offer_auto == "hachback" or self.offer_auto == "sendan"):
+            self.anzahle_auto = 2
+            return self.anzahle_auto
+        elif (self.numberOffamily<= 4) and (self.offer_auto == "hachback" or self.offer_auto == "sendan"):
+            self.anzahle_auto = 1
+            return self.anzahle_auto
+        elif (8<self.numberOffamily<=12) and (self.offer_auto == "hachback" or self.offer_auto == "sendan"):
+            self.anzahle_auto = 3
+            return self.anzahle_auto
+        elif (2<=self.numberOffamily<=8) and (self.offer_auto == "suv"):
+            self.anzahle_auto = 1
+            return self.anzahle_auto
+        elif (8<self.numberOffamily<=16) and (self.offer_auto == "suv"):
+            self.anzahle_auto = 2
+            return self.anzahle_auto
+        else:
+            self.anzahle_auto = 1
+            return self.anzahle_auto
 
     def get_calculate_auto_rabbatt(self):
         if self.numberOffamily >= 2:
-            self.discount =((self.price) * (self.anzahle_auto)) - (self.price * 0.3)
+            self.discount = (self.price * 0.3) - (self.price * self.anzahle_auto)
         else:
-            self.discount=self.price
+            self.discount =0
         return self.discount
 
 
-    def get_anzahle_auto(self):
-        if (self.numberOffamily>=4 and self.numberOffamily>=8) and (self.offer_auto=="hatchback" or self.offer_auto=="sendan"):
-            self.anzahle_auto = 2
-            return self.anzahle_auto
-        elif (self.numberOffamily>=4) and (self.offer_auto=="hatchback" or self.offer_auto=="sendan"):
-            self.anzahle_auto=1
-            return self.anzahle_auto
-        elif (self.numberOffamily > 8 and self.numberOffamily >= 12) and (self.offer_auto == "hatchback" or self.offer_auto == "sendan"):
-            self.anzahle_auto=3
-            return self.anzahle_auto
-        elif(self.numberOffamily>=2 and self.numberOffamily>=8) and (self.offer_auto=="suv"):
-            self.anzahle_auto=1
-            return self.anzahle_auto
-        elif(self.numberOffamily>8 and self.numberOffamily>=16) and (self.offer_auto=="suv"):
-            self.anzahle_auto=2
-            return self.anzahle_auto
-        else:
-            self.anzahle_auto=1
-            return self.anzahle_auto
 
+    def gesamt_preice(self):
+        self.gesamt_cost=(self.price -self.discount) *self.anzahle_auto
 
     def get_user_info(self):
-        print(f"User {self.name} current nummber of family is {self.numberOffamily}\n"
-              
-              f" and chose auto is {self.offer_auto}\n car price ist {self.price} Euro per days and mit discount {self.discount} Euro, per days! "
-              f"and anzahle des Auto ist {self.anzahle_auto}")
+        print(f"User {self.name} current nummber of family is {self.numberOffamily}\n"   
+        f" and chose auto is {self.offer_auto}\n the daily price of each car is {self.price} Euro and mit discount {self.discount} Euro, per days! \n"
+        f" total cost is {self.gesamt_cost} "
+        f"and anzahle des Auto ist {self.anzahle_auto}")
 
 
 

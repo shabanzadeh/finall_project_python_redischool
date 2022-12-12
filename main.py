@@ -21,7 +21,7 @@ while user_input != "exit":
     app_user_one.get_calculate_price()
     app_user_one.get_calculate_auto_rabbatt()
     app_user_one.get_anzahle_auto()
-
+    app_user_one.gesamt_preice()
 
     app_user_one.get_user_info()
     app_user_one.change_password("234")
