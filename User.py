@@ -1,30 +1,40 @@
 import openpyxl
-class User:
-    car_file = openpyxl.load_workbook("Car_Rantal.xlsx")
-    car_list = car_file['Tabelle1']
-    print(car_list)
-    car_per_name = {}
-    car_per_passagiere = {}
-    car_price_type = {}
-    dicount_car = {}
-    for car_row in range(2, car_list.max_row + 1):
-        number_passengers = car_list.cell(car_row, 3).value
-        preis_car = car_list.cell(car_row, 7).value
-        type_car = car_list.cell(car_row, 5).value
-        if type_car in car_per_name:
-            current_name_product = car_per_name[type_car]
-            car_per_name[type_car] = current_name_product + 1
+car_file =openpyxl.load_workbook("Car_Rantal.xlsx")
 
-            # calculate type with number of passengers
-            car_per_passagiere[type_car] = number_passengers
-        else:
-            car_per_name[type_car] = 1
-        if type_car in car_price_type:
-            current_total_price = car_price_type.get(type_car)
-            car_price_type[type_car] = preis_car
-            dicount_car[type_car] = 0.3 * preis_car
-        car_price_type[type_car] = preis_car
-        dicount_car[type_car] = 0.3 * preis_car
+car_list =car_file['Tabelle1']
+#how many type car is available
+car_per_name = {}
+car_per_passagiere={}
+car_price_type = {}
+dicount_car={}
+
+
+
+for car_row in range(2, car_list.max_row + 1):
+    number_passengers = car_list.cell(car_row, 3).value
+    preis_car=car_list.cell(car_row,7).value
+    type_car =car_list.cell(car_row,5).value
+
+
+
+
+   # print(type_car)
+    if type_car in car_per_name:
+        current_name_product= car_per_name[type_car]
+        car_per_name[type_car]=current_name_product +1
+
+# calculate type with number of passengers
+        car_per_passagiere[type_car]=number_passengers
+    else:
+        car_per_name[type_car] =1
+    if type_car in car_price_type:
+        current_total_price =car_price_type.get(type_car)
+        car_price_type[type_car]=preis_car
+        dicount_car[type_car]=0.3*preis_car
+    car_price_type[type_car]=preis_car
+    dicount_car[type_car]=0.3 * preis_car
+class User:
+
 
     def __init__(self,name, user_email, password,numberOffamily,select_car_user):
         self.name = name
@@ -36,7 +46,14 @@ class User:
         self.offer_auto = ""
         self.price = 0
         self.discount=0
+        self.anzahle_auto=0
 
+    def herzlich_welcome(self):
+        print("Herzlichen welcomen in Car rental\n")
+
+        print(f"see available taxis at the moment with copacity: {car_per_passagiere}\n")
+        print(f"Car rental price in one day {car_price_type}\n")
+        print(f"if the car is reserved as a family, we have a 30% discount for you: {dicount_car} Euro \n")
 
     def get_number_family(self):
         for i in range(1):
@@ -86,7 +103,7 @@ class User:
         return self.select_car_user
 
 
-    def get_calculate_price(self,car_price_type):
+    def get_calculate_price(self):
         if self.offer_auto=="hachback":
             price1 =car_price_type['Hatchback']
         elif self.offer_auto=="suv":
@@ -100,34 +117,45 @@ class User:
 
     def get_calculate_auto_rabbatt(self):
         if self.numberOffamily >= 2:
-            self.discount =(self.price) - (self.price * 0.3)
+            self.discount =((self.price) * (self.anzahle_auto)) - (self.price * 0.3)
         else:
             self.discount=self.price
         return self.discount
 
 
+    def get_anzahle_auto(self):
+        if (self.numberOffamily>=4 and self.numberOffamily>=8) and (self.offer_auto=="hatchback" or self.offer_auto=="sendan"):
+            self.anzahle_auto = 2
+            return self.anzahle_auto
+        elif (self.numberOffamily>=4) and (self.offer_auto=="hatchback" or self.offer_auto=="sendan"):
+            self.anzahle_auto=1
+            return self.anzahle_auto
+        elif (self.numberOffamily > 8 and self.numberOffamily >= 12) and (self.offer_auto == "hatchback" or self.offer_auto == "sendan"):
+            self.anzahle_auto=3
+            return self.anzahle_auto
+        elif(self.numberOffamily>=2 and self.numberOffamily>=8) and (self.offer_auto=="suv"):
+            self.anzahle_auto=1
+            return self.anzahle_auto
+        elif(self.numberOffamily>8 and self.numberOffamily>=16) and (self.offer_auto=="suv"):
+            self.anzahle_auto=2
+            return self.anzahle_auto
+        else:
+            self.anzahle_auto=1
+            return self.anzahle_auto
+
 
     def get_user_info(self):
-        print(f"User {self.name} current nummber of family is {self.numberOffamily}"
-              f" and chose {self.offer_auto} car price ist {self.price} Euro per days and mit discount {self.discount}, per days! ")
+        print(f"User {self.name} current nummber of family is {self.numberOffamily}\n"
+              
+              f" and chose auto is {self.offer_auto}\n car price ist {self.price} Euro per days and mit discount {self.discount} Euro, per days! "
+              f"and anzahle des Auto ist {self.anzahle_auto}")
 
 
 
 
 
 
-    def exist_booking_auto(self,anzahle_auto,total_numberCar_list):
 
-        for x in total_numberCar_list:
-            if anzahle_auto>=2 or total_numberCar_list>=2:
-                result =total_numberCar_list[0] or total_numberCar_list[2]  or total_numberCar_list[3]
-                return self.result.append(result)
-            elif total_numberCar_list>=1:
-                result=total_numberCar_list[0]
-                return self.result.append(result)
-
-    def booking_info(self):
-        print(f"haben für dich auto {self.result} zur verfügung")
 
     # def arrange_booking(self,anzahl_ auto):
 
